@@ -368,7 +368,7 @@ export const MessageResponse = memo(
     // legacy spans are left for a later render when their closer arrives.
     const content =
       typeof children === "string"
-        ? transformMathDelimiters(children)
+        ? repairMathForDisplay(transformMathDelimiters(children))
         : children;
 
     return (

@@ -194,7 +194,7 @@ describe("practice display surfaces", () => {
 		}
 	});
 
-	it("does not change the collapsed preview, dismissal or global prose renderer", () => {
+	it("does not change the collapsed preview or dismissal, while prose repair stays presentational", () => {
 		const preview = renderToStaticMarkup(dock({ statement: doubled }, false));
 		assert.ok(preview.includes(doubled));
 		assert.deepEqual(math(preview).annotations, []);
@@ -202,8 +202,8 @@ describe("practice display surfaces", () => {
 		assert.ok(dismissed.includes("Problem dismissed."));
 		assert.deepEqual(math(dismissed).annotations, []);
 		const plain = math(renderToStaticMarkup(<MessageResponse>{doubled}</MessageResponse>));
-		assert.deepEqual(plain.annotations, [doubled.slice(1, -1)]);
-		assert.ok(!plain.glyphs.includes("∇")); // Same unchanged assistant/user MessageResponse path.
+		assert.deepEqual(plain.annotations, [tex]);
+		assert.ok(plain.glyphs.includes("∇"));
 	});
 
 	it("teaching shape parsing retains source bytes; presentation alone recovers them", () => {
